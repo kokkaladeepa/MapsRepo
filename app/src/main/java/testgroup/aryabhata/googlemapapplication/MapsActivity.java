@@ -1,11 +1,8 @@
 package testgroup.aryabhata.googlemapapplication;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -36,16 +33,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //checkLocationPermission();
-        }
+        //if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        //checkLocationPermission();
+        //}
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -67,19 +63,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-      //  Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                buildGoogleApiClient();
-                mMap.setMyLocationEnabled(true);
-            }
-        }
-        else {
-            buildGoogleApiClient();
-            mMap.setMyLocationEnabled(true);
-        }
+        //Initialize Google Play Services
+        //if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        // if (ContextCompat.checkSelfPermission(this,
+        // Manifest.permission.ACCESS_FINE_LOCATION)
+        // == PackageManager.PERMISSION_GRANTED) {
+        //buildGoogleApiClient();
+        //mMap.setMyLocationEnabled(true);
+        //}
+        //}
+        //else {
+        buildGoogleApiClient();
+        mMap.setMyLocationEnabled(true);
+        //}
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -113,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        sharedpreferences = getSharedPreferences("MyPrefs" , Context.MODE_PRIVATE);
+
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
