@@ -19,6 +19,7 @@ import android.widget.Toast;
 public class FormActivity extends AppCompatActivity {
     Button submitButton;
     SharedPreferences sharedpreferences;
+    final String TAG = "FormActivity.java";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +49,21 @@ public class FormActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                EditText location = (EditText) findViewById(R.id.Location_id);
-                String location_value = location.getText().toString();
-//store the data
+               EditText location = (EditText) findViewById(R.id.Location_id);
+              String location_string = location.getText().toString();
+                int location_value = Integer.parseInt( location.getText().toString() );
+
+            //store the data
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("locationid", location_value);
+                Log.e(TAG,"before " + location_value);
+                editor.putInt("locationid", location_value);
                 editor.commit();
+
+                int a= sharedpreferences.getInt("locationid",1);
+                Log.e(TAG,"after: " + a);
+
                 Toast.makeText(FormActivity.this,
-                        location_value,
+                        location_string,
                         Toast.LENGTH_SHORT).show();
 
 

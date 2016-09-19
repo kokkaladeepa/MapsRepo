@@ -1,12 +1,15 @@
 package testgroup.aryabhata.googlemapapplication;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,7 +36,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-
+    SharedPreferences sharedpreferences;
+    final String TAG = "MapsActivity.java";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onLocationChanged(Location location) {
 
+
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
@@ -122,7 +127,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
+//my code
+        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putLong("Latitude",location.getLatitude());
+        editor.putLong("Longitude", Double.doubleToLongBits(location.getLongitude()));
+        editor.commit();
+        double d=Double.doubleToLongBits(location.getLatitude());
+       long lat= sharedpreferences.getLong("Latitude",1);
+        Log.e(TAG,"Latitude id is " + Double.doubleToLongBits(location.getLatitude()));
+        long l= sharedpreferences.getLong("Longitude",1);
+        Log.e(TAG,"Longitude id is " + Double.doubleToLongBits(location.getLongitude()));
+        Log.e(TAG,"Longitude from db is " +l);
+        //new code
 
+      /*  //new code
+        lat= location.getLatitude();
+        Long=location.getLongitude();
+
+        latitude=String.valueOf(lat);
+        longitude=String.valueOf(Long);
+
+
+        SharedPreferences.Editor edit=pref1.edit();
+
+        edit.putString("latitude", latitude);
+        edit.putString("longitude", longitude);
+
+        edit.commit();*/
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
