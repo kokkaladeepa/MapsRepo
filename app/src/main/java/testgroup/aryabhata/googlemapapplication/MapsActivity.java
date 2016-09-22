@@ -130,15 +130,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //my code
         sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putLong("Latitude",location.getLatitude());
-        editor.putLong("Longitude", Double.doubleToLongBits(location.getLongitude()));
+        String lat=String.valueOf(location.getLatitude());
+        String lng=String.valueOf(location.getLongitude());
+        editor.putString("Latitude",lat);
+        editor.putString("Longitude", lng);
+        String locationid=lat+","+lng;
+        Log.e(TAG,locationid);
+        editor.putString("locationkey", locationid);
         editor.commit();
-        double d=Double.doubleToLongBits(location.getLatitude());
-       long lat= sharedpreferences.getLong("Latitude",1);
-        Log.e(TAG,"Latitude id is " + Double.doubleToLongBits(location.getLatitude()));
-        long l= sharedpreferences.getLong("Longitude",1);
-        Log.e(TAG,"Longitude id is " + Double.doubleToLongBits(location.getLongitude()));
-        Log.e(TAG,"Longitude from db is " +l);
+        Log.e(TAG,"Latitude id is " + lat);
+
+        Log.e(TAG,"Longitude id is " + lng);
+        String l= sharedpreferences.getString("locationkey","deepa");
+        Log.e(TAG,"locationkey from db is " +l);
+        Toast.makeText(this, locationid, Toast.LENGTH_LONG).show();
         //new code
 
       /*  //new code
