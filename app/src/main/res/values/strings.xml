@@ -4,6 +4,7 @@
     <string name="app_name">GoogleMapApplication</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_form">FormActivity</string>
+    <string name="title_activity_details">DetailsActivity</string>
 
 
 </resources>

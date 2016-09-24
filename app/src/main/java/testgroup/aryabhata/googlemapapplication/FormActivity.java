@@ -37,7 +37,7 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-//button action
+        //button action
         addListenerOnButton();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,24 +61,6 @@ public class FormActivity extends AppCompatActivity {
         final Context context = this;
 
         submitButton = (Button) findViewById(R.id.submitbutton_id);
-        /*submitButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-               EditText location = (EditText) findViewById(R.id.Location_id);
-              String location_string = location.getText().toString();
-                int location_value = Integer.parseInt( location.getText().toString() );
-
-
-                Toast.makeText(FormActivity.this,
-                        location_string,
-                        Toast.LENGTH_SHORT).show();
-
-
-            }
-
-        });
-*/
         //code for map
         submitButton.setOnClickListener(new View.OnClickListener() {
             //dest addr lon and ltt shud be fetched from db which has been stored already
@@ -89,18 +71,12 @@ public class FormActivity extends AppCompatActivity {
                 db_loc = sharedpreferences.getString("locationkey", "deepa");
                 Log.e(TAG, "locationkey from db is " + db_loc);
                 EditText location = (EditText) findViewById(R.id.Location_id);
-               /* String location_string = location.getText().toString();
-                String temp[]=location_string.split(",");
-                String l1=temp[0];
-                String l2=temp[1];*/
                final Intent intent = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
                                 "http://maps.google.com/maps?daddr="+db_loc));
                 startActivity(intent);
 
-               /* //pav code
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=42.5424138,-82.9021828"));
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");*/
+
             }
         });
 

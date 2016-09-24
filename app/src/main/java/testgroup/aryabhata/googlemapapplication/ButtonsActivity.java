@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
  * Created by Sainath on 9/16/2016.
  */
 public class ButtonsActivity  extends Activity{
-    Button button;
+    Button capturebutton;
     Button directionbutton;
     final String TAG = "ButtonsActivity.java";
     SharedPreferences sharedpreferences;
@@ -33,14 +33,14 @@ public class ButtonsActivity  extends Activity{
 
         final Context context = this;
 
-        button = (Button) findViewById(R.id.button1);
+        capturebutton = (Button) findViewById(R.id.capture_id);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        capturebutton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                Intent intent = new Intent(context, MapsActivity.class);
+                Intent intent = new Intent(context, DetailsActivity.class);
                 startActivity(intent);
 
             }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="testgroup.aryabhata.googlemapapplication.DetailsActivity"
+    tools:showIn="@layout/activity_details">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name_id"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/email_id"
+        android:layout_below="@+id/name_id"
+        android:layout_alignRight="@+id/name_id"
+        android:layout_alignEnd="@+id/name_id"
+        android:layout_marginTop="47dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vehicle_id"
+        android:layout_below="@+id/email_id"
+        android:layout_alignRight="@+id/email_id"
+        android:layout_alignEnd="@+id/email_id"
+        android:layout_marginTop="40dp"
+        android:layout_alignLeft="@+id/email_id"
+        android:layout_alignStart="@+id/email_id" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Email ID"
+        android:id="@+id/email_label"
+        android:layout_above="@+id/vehicle_id"
+        android:layout_toLeftOf="@+id/name_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/email_id" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Vehicle Number"
+        android:id="@+id/vehicle_label"
+        android:layout_alignTop="@+id/vehicle_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name"
+        android:id="@+id/name_label"
+        android:layout_above="@+id/email_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/vehicle_label"
+        android:layout_alignEnd="@+id/vehicle_label"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/Register_id"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/vehicle_id"
+        android:layout_toRightOf="@+id/vehicle_label"
+        android:layout_toEndOf="@+id/vehicle_label" />
+
+</RelativeLayout>
