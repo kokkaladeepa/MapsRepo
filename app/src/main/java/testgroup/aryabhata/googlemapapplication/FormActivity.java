@@ -37,6 +37,10 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        EditText location = (EditText) findViewById(R.id.Location_id);
+        location.setText(sharedpreferences.getString("locationkey", "deepa"));
+
         //button action
         addListenerOnButton();
 
@@ -71,6 +75,7 @@ public class FormActivity extends AppCompatActivity {
                 db_loc = sharedpreferences.getString("locationkey", "deepa");
                 Log.e(TAG, "locationkey from db is " + db_loc);
                 EditText location = (EditText) findViewById(R.id.Location_id);
+
                final Intent intent = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
                                 "http://maps.google.com/maps?daddr="+db_loc));

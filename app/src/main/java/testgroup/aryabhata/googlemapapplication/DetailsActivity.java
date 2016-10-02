@@ -40,7 +40,7 @@ public class DetailsActivity extends AppCompatActivity {
         final Context context = this;
 
         registerbutton = (Button) findViewById(R.id.Register_id);
-        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences("Details_db", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         edit_field = (EditText) findViewById(R.id.name_id);
