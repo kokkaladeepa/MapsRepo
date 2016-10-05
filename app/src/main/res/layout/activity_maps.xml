@@ -7,4 +7,16 @@
     android:name="com.google.android.gms.maps.SupportMapFragment">
 
 
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Share"
+            android:id="@+id/shareit"
+            android:background="#fca6ec"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="69dp"
+            android:layout_below="@+id/textView"
+           />
+
 </fragment>

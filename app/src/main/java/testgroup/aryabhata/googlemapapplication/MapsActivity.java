@@ -2,6 +2,7 @@ package testgroup.aryabhata.googlemapapplication;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,6 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -38,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationRequest mLocationRequest;
     SharedPreferences sharedpreferences;
     final String TAG = "MapsActivity.java";
+    String idurl=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +54,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        // code for sharing button
+        Button btn_share=(Button)findViewById(R.id.shareit);
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                shareIt();
+            }
+        });
     }
-
+    private void shareIt() {
+//sharing implementation here
+        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+       idurl = sharedpreferences.getString("idurl","default");
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "AndroidSolved");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,idurl );
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
 
     /**
      * Manipulates the map once available.
