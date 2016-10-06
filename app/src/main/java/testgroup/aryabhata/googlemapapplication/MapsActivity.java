@@ -11,7 +11,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Menu;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -55,12 +57,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         // code for sharing button
-        Button btn_share=(Button)findViewById(R.id.shareit);
-        btn_share.setOnClickListener(new View.OnClickListener() {
+        // Button btn_share=(Button)findViewById(R.id.shareit);
+       /* btn_share.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 shareIt();
             }
-        });
+        });*/
+    }
+        public boolean onCreateOptionsMenu(Menu menu) {
+            super.onCreateOptionsMenu(menu);
+            getMenuInflater().inflate(R.menu.menu, menu);
+            return true;
+        }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.share:
+                shareIt();
+//Toast.makeText(getApplicationContext(),"Add Clicked",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.home:
+                Toast.makeText(getApplicationContext(),"Back to home screen",Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     private void shareIt() {
 //sharing implementation here
