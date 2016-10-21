@@ -18,5 +18,8 @@
     <string name="err_msg_email">Please enter a Valid Email</string>
     <string name="err_msg_password">Enter a Password</string>
     <string name="err_msg_dob">Enter a valid D.O.B</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_closea">Close drawer</string>
+
 
 </resources>

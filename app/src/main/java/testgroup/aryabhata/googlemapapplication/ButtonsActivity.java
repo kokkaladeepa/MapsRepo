@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.SharedPreferences;
+import android.widget.FrameLayout;
 
 /**
  * Created by Sainath on 9/16/2016.
  */
-public class ButtonsActivity  extends Activity{
+public class ButtonsActivity  extends MenuActivity{
     Button capturebutton;
     Button directionbutton;
     final String TAG = "ButtonsActivity.java";
@@ -25,7 +26,11 @@ public class ButtonsActivity  extends Activity{
         //my code
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buttons);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frames);
+        getLayoutInflater().inflate(R.layout.activity_buttons, contentFrameLayout);
+
+
+       // setContentView(R.layout.activity_buttons);
         addListenerOnButton();
     }
 
@@ -40,7 +45,7 @@ public class ButtonsActivity  extends Activity{
             @Override
             public void onClick(View arg0) {
 
-                Intent intent = new Intent(context, DetailsActivity.class);
+                Intent intent = new Intent(context, MapsActivity.class);
                 startActivity(intent);
 
             }

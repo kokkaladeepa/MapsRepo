@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="testgroup.aryabhata.googlemapapplication.FormActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="testgroup.aryabhata.googlemapapplication.FormActivity"
+    tools:showIn="@layout/activity_form"
+    android:baselineAligned="true"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:ems="5"
+        android:id="@+id/Location_id"
+        android:hint="Id"
+        android:fontFamily="monospace"
+        android:layout_gravity="right"
+        android:layout_alignTop="@+id/submitbutton_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_form" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:text="Enter the Target Location ID"
+        android:fontFamily="monospace"
+        android:id="@+id/textView"
+        android:layout_weight="0.00"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:fontFamily="monospace"
+        android:id="@+id/submitbutton_id"
+        android:background="#fca6ec"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/Location_id"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+</RelativeLayout>

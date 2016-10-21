@@ -36,8 +36,8 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
         /////new code...
         signupInputLayoutName = (TextInputLayout) findViewById(R.id.signup_input_layout_name);
         signupInputLayoutEmail = (TextInputLayout) findViewById(R.id.signup_input_layout_email);
@@ -59,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-
+/*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
     }
 
     private void submitForm() {
