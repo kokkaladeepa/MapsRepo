@@ -79,7 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 mOutput.setText(id);
                 System.out.println("JSON ID is :" + id);
                 editor.putString("idurl",id);
-                editor.commit();
+                String generatedkey[]=id.split("gl/");
+                System.out.println("generated location key is :" + generatedkey[0]);
+                editor.putString("generatedkey",id);
+
+                editor.apply();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

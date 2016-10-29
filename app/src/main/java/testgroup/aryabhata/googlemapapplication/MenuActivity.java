@@ -32,7 +32,7 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * List item array for navigation drawer items.
      * */
-    protected String[] listArray = { "Menu","Register", "ShareLocation" ,"ShortURL"};
+    protected String[] listArray = { "Menu","Register", "ShareLocation" ,"ShareVehicleData"};
 
     /**
      * Static variable for selected item position. Which can be used in child activity to know which item is selected from the list.
@@ -165,7 +165,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MapsActivity.class));
                 break;
             case 3:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, VehicleDetails.class));
                 break;
             default:
                 break;

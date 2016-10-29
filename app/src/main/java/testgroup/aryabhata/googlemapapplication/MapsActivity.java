@@ -6,15 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
-import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -31,6 +30,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -43,7 +57,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationRequest mLocationRequest;
     SharedPreferences sharedpreferences;
     final String TAG = "MapsActivity.java";
-    String idurl=null;
+    Variable var=new Variable();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,57 +71,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         // code for sharing button
-        // Button btn_share=(Button)findViewById(R.id.shareit);
-       /* btn_share.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                shareIt();
-            }
-        });*/
-    }
-        public boolean onCreateOptionsMenu(Menu menu) {
-            super.onCreateOptionsMenu(menu);
-            getMenuInflater().inflate(R.menu.menu, menu);
-            return true;
-        }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.share:
-                shareIt();
-//Toast.makeText(getApplicationContext(),"Add Clicked",Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.home:
-                Toast.makeText(getApplicationContext(),"Back to home screen",Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    private void shareIt() {
-//sharing implementation here
-        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-       idurl = sharedpreferences.getString("idurl","default");
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "AndroidSolved");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,idurl );
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        //Button btn_share=(Button)findViewById(R.id.shareit);
+        //btn_share.setOnClickListener(new View.OnClickListener() {
+        //public void onClick(View v) {
+        //  shareIt();
+        //}
+        //});
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -182,29 +164,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String locationid=lat+","+lng;
         Log.e(TAG,locationid);
         editor.putString("locationkey", locationid);
-        editor.commit();
+        editor.apply();
         Log.e(TAG,"Latitude id is " + lat);
-
         Log.e(TAG,"Longitude id is " + lng);
-        String l= sharedpreferences.getString("locationkey","deepa");
+        String l= sharedpreferences.getString("locationkey","default");
         Log.e(TAG,"locationkey from db is " +l);
         Toast.makeText(this, locationid, Toast.LENGTH_LONG).show();
-        //new code
 
-      /*  //new code
-        lat= location.getLatitude();
-        Long=location.getLongitude();
+        // code for generating shorten url
+        newShortAsync task = new newShortAsync();
+        task.execute();
 
-        latitude=String.valueOf(lat);
-        longitude=String.valueOf(Long);
-
-
-        SharedPreferences.Editor edit=pref1.edit();
-
-        edit.putString("latitude", latitude);
-        edit.putString("longitude", longitude);
-
-        edit.commit();*/
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
@@ -284,6 +254,114 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             // other 'case' lines to check for other permissions this app might request.
             // You can add here other case statements according to your requirement.
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.share:
+                shareIt();
+                return true;
+            case R.id.home:
+                Toast.makeText(getApplicationContext(),"Help Clicked",Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void shareIt()  {
+        String s=var.getInString();
+        System.out.println("ID:" + s);
+        Log.e(TAG,"shortened value is " + s);
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String[] key=s.split("gl/");
+        System.out.println("code is:" +  key[1]);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "AndroidSolved");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,key[1]);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    // code for shorten url implementation
+    public class newShortAsync extends AsyncTask<Void, Void, String> {
+
+        String db_loc= sharedpreferences.getString("locationkey","deepa");
+        String longUrl = "http://maps.google.com/maps?saddr=My+Location&daddr="+db_loc;
+        String idurl=null;
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            System.out.println("JSON RESP:" + s);
+            String response = s;
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                idurl = jsonObject.getString("id");
+                var.setInString(idurl);
+                sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("shorturl",idurl);
+                editor.apply();
+                System.out.println("ID:" + idurl);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            BufferedReader reader;
+            StringBuffer buffer;
+            String res = null;
+            String json = "{\"longUrl\": \"" + longUrl + "\"}";
+            try {
+                URL url = new URL("https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyDLel-zMRXtYYu-jHWP-JJogzUH04cR_CM");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setReadTimeout(40000);
+                con.setConnectTimeout(40000);
+                con.setRequestMethod("POST");
+                con.setRequestProperty("Content-Type", "application/json");
+                OutputStream os = con.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+
+                writer.write(json);
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int status = con.getResponseCode();
+                InputStream inputStream;
+                if (status == HttpURLConnection.HTTP_OK)
+                    inputStream = con.getInputStream();
+                else
+                    inputStream = con.getErrorStream();
+
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                buffer = new StringBuffer();
+
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                res = buffer.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return res;
         }
     }
 }

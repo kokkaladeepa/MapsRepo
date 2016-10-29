@@ -27,6 +27,9 @@ public class FormActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     final String TAG = "FormActivity.java";
     public String db_loc;
+    String[] key=null;
+    String s;
+    Variable var=new Variable();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -38,8 +41,18 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+       s= sharedpreferences.getString("shorturl","defaultshorturl");
         EditText location = (EditText) findViewById(R.id.Location_id);
-        location.setText(sharedpreferences.getString("locationkey", "deepa"));
+        //
+       // String s=var.getInString();
+        System.out.println("ID in form is :" + s);
+
+       key =s.split("gl/");
+        System.out.println("code is:" +  key[1]);
+       // location.setText(sharedpreferences.getString("locationkey", "deepa"));
+        //new
+        location.setText(key[1]);
+
 
         //button action
         addListenerOnButton();
@@ -78,7 +91,7 @@ public class FormActivity extends AppCompatActivity {
 
                final Intent intent = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
-                                "http://maps.google.com/maps?daddr="+db_loc));
+                                "https://goo.gl/maps/"+key[1]));
                 startActivity(intent);
 
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="testgroup.aryabhata.googlemapapplication.VehicleDetails">
+    <EditText
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:id="@+id/data_id"
+        android:hint="data"
+        android:layout_gravity="right"
+        android:layout_alignTop="@+id/sharebutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter the Vehicle Information"
+        android:id="@+id/textView"
+        android:layout_weight="0.00"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:id="@+id/sharebutton"
+        android:background="#fca6ec"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/Location_id"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+</RelativeLayout>

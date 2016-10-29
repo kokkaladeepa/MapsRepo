@@ -175,7 +175,7 @@ public class DetailsActivity extends AppCompatActivity {
         editor.putString("Name",name);
         editor.putString("EmailID", email);
         editor.putString("VehicleNumber", vehiclenumber);
-        editor.commit();
+        editor.apply();
         String l= sharedpreferences.getString("Name","deepa");
         Log.e(TAG,"Name from db is " +l);
 
