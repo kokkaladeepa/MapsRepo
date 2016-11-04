@@ -281,9 +281,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         String[] key=s.split("gl/");
-        System.out.println("code is:" +  key[1]);
+        System.out.println("code in maps activity:" +  key[1]);
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "AndroidSolved");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,key[1]);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, key[1]);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 

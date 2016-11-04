@@ -91,7 +91,7 @@ public class FormActivity extends AppCompatActivity {
 
                final Intent intent = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
-                                "https://goo.gl/maps/"+key[1]));
+                                "https://goo.gl/"+key[1]));
                 startActivity(intent);
 
 

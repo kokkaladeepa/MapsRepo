@@ -27,7 +27,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MenuActivity"
+            android:name=".Splash"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +35,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ButtonsActivity"
+            android:label="@string/title_activity_form"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/app_name"
@@ -45,9 +50,7 @@
         <activity
             android:name=".DetailsActivity"
             android:label="@string/title_activity_details" />
-        <activity
-            android:name=".ButtonsActivity"
-            android:label="@string/title_activity_form" />
+
         <activity android:name=".MainActivity" />
         <activity android:name=".VehicleDetails"></activity>
     </application>

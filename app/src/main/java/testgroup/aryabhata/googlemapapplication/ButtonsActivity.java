@@ -14,9 +14,10 @@ import android.widget.FrameLayout;
 /**
  * Created by Sainath on 9/16/2016.
  */
-public class ButtonsActivity  extends MenuActivity{
+public class ButtonsActivity  extends Activity{
     Button capturebutton;
     Button directionbutton;
+    Button sharebutton;
     final String TAG = "ButtonsActivity.java";
     SharedPreferences sharedpreferences;
 
@@ -26,11 +27,11 @@ public class ButtonsActivity  extends MenuActivity{
         //my code
 
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frames);
-        getLayoutInflater().inflate(R.layout.activity_buttons, contentFrameLayout);
+       /* FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frames);
+        getLayoutInflater().inflate(R.layout.activity_buttons, contentFrameLayout);*/
 
 
-       // setContentView(R.layout.activity_buttons);
+       setContentView(R.layout.activity_buttons);
         addListenerOnButton();
     }
 
@@ -60,6 +61,20 @@ public class ButtonsActivity  extends MenuActivity{
 
 
                 Intent intent = new Intent(context, FormActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+        sharebutton=(Button)findViewById(R.id.sharebutton_id);
+        sharebutton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                //code for default text setting
+
+
+                Intent intent = new Intent(context, VehicleDetails.class);
                 startActivity(intent);
 
             }

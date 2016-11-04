@@ -8,6 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="testgroup.aryabhata.googlemapapplication.VehicleDetails">
+
     <EditText
         android:layout_width="178dp"
         android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter the Vehicle Information"
+        android:text="Below is location ID of your parking area,edit the field to add extra information regarding vehicle information"
         android:id="@+id/textView"
         android:layout_weight="0.00"
         android:layout_alignParentTop="true"
@@ -33,7 +34,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Submit"
+        android:text="Share"
         android:id="@+id/sharebutton"
         android:background="#fca6ec"
         android:layout_gravity="center_horizontal"

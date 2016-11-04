@@ -17,11 +17,28 @@ public class VehicleDetails extends AppCompatActivity {
     Button share_button;
     EditText data;
     String data_info;
+    SharedPreferences sharedpreferences;
+    String s;
+    String[] key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_details);
+
+        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        s= sharedpreferences.getString("shorturl","defaultshorturl");
+        EditText data_field = (EditText) findViewById(R.id.data_id);
+        //
+        // String s=var.getInString();
+        System.out.println("ID in form is :" + s);
+
+        key =s.split("gl/");
+        System.out.println("code is:" +  key[1]);
+        // location.setText(sharedpreferences.getString("locationkey", "deepa"));
+        //new
+        data_field.setText(key[1]);
         addListenerOnButton();
+
     }
     public void addListenerOnButton() {
 
